@@ -1,4 +1,4 @@
-# flutter_application_1
+# Every Day Stoics
 
 A new Flutter project.
 
