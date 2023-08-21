@@ -1,5 +1,7 @@
 import UIKit
 import Flutter
+import share
+
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -8,6 +10,8 @@ import Flutter
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
+    SharePlugin.register(with: self.registrar(forPlugin: "io.flutter.plugins.share"))
+
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
