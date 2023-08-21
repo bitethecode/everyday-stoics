@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'dart:math';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,6 +40,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List _items = [];
   bool isItemsLoaded = false;
+  String currentQuote = '';
+  int currentQuoteIndex = 0;
 
   Future<void> readItems() async {
     final String res = await rootBundle.loadString('assets/data.json');
@@ -46,14 +49,13 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _items = data["quotes"];
       isItemsLoaded = true;
+      currentQuote = _items[currentQuoteIndex];
     });
   }
 
-  String text = 'Hello World';
-
   void changeText() {
     setState(() {
-      text = 'This is me!';
+      currentQuote = _items[randomNumber()];
     });
   }
 
@@ -76,7 +78,16 @@ class _MyHomePageState extends State<MyHomePage> {
     shareContent(content);
   }
 
-  void tapLike() {}
+  void tapLike() async {
+    addQuote(currentQuote);
+  }
+
+  Future<void> addQuote(String quote) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> quotes = prefs.getStringList('quotes') ?? [];
+    quotes.add(quote);
+    await prefs.setStringList('savedQuotes', quotes);
+  }
 
   Column _buildButtonColumn(
       Color color, IconData icon, String label, TapCallback tapCallback) {
@@ -139,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 50.0, vertical: 50.0),
                   child: Text(
-                    _items[randomNumber()],
+                    currentQuote,
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 24,
@@ -160,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: changeText,
-          tooltip: 'Increment',
+          tooltip: 'New Quote',
           child: const Icon(Icons.refresh),
         ),
       );
