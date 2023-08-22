@@ -5,12 +5,19 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'saved_quotes.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 typedef TapCallback = void Function();
+
+class QuoteData {
+  final String quote;
+  final DateTime date;
+  QuoteData({required this.quote, required this.date});
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -84,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> addQuote(String quote) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> quotes = prefs.getStringList('quotes') ?? [];
+    List<QuoteData> quotes = prefs.getStringList('savedQuotes') ?? [];
     quotes.add(quote);
     await prefs.setStringList('savedQuotes', quotes);
   }
@@ -164,6 +171,20 @@ class _MyHomePageState extends State<MyHomePage> {
                           Colors.grey, Icons.share, 'share', tapShare),
                       _buildButtonColumn(
                           Colors.grey, Icons.favorite_border, 'like', tapLike)
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.settings),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SavedQuotesScreen()),
+                          );
+                        },
+                      )
                     ])
               ],
             )
