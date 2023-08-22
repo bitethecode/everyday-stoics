@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'quotes_func.dart';
 
 class SavedQuotesScreen extends StatefulWidget {
+  const SavedQuotesScreen({Key? key}) : super(key: key);
+
   @override
   _SavedQuotesScreenState createState() => _SavedQuotesScreenState();
 }
 
 class _SavedQuotesScreenState extends State<SavedQuotesScreen> {
-  List<String> savedQuotes = [];
+  List<QuoteData> savedQuotes = [];
 
   @override
   void initState() {
     super.initState();
-    getSavedQuotes();
+    setSavedQuotes();
   }
 
-  Future<void> getSavedQuotes() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    List<String> quotes = preferences.getStringList('savedQuotes') ?? [];
+  Future<void> setSavedQuotes() async {
+    List<QuoteData> quotes = await getSavedQuotes();
     setState(() {
       savedQuotes = quotes;
     });
@@ -27,14 +28,21 @@ class _SavedQuotesScreenState extends State<SavedQuotesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Saved Quotes'),
+        title: const Text('Saved Quotes'),
       ),
       body: ListView(
         children: savedQuotes
-            .map((quote) => ListTile(
-                  title: Text(quote),
-                  subtitle: Text(quote.date.toString()),
-                ))
+            .map((quoteData) => Container(
+                margin: const EdgeInsets.all(4.0),
+                decoration: BoxDecoration(
+                  color: Colors.grey[
+                      200], // Change this to your desired background color
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+                child: ListTile(
+                  title: Text(quoteData.quote),
+                  subtitle: Text(quoteData.date.toString()),
+                )))
             .toList(),
       ),
     );

@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'dart:math';
 import 'package:share_plus/share_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'saved_quotes.dart';
+import 'quotes_func.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +13,8 @@ void main() {
 
 typedef TapCallback = void Function();
 
-class QuoteData {
-  final String quote;
-  final DateTime date;
-  QuoteData({required this.quote, required this.date});
-}
-
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +30,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -77,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    // clearSharedPreferences();
     readItems();
   }
 
@@ -89,36 +84,12 @@ class _MyHomePageState extends State<MyHomePage> {
     addQuote(currentQuote);
   }
 
-  Future<void> addQuote(String quote) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<QuoteData> quotes = prefs.getStringList('savedQuotes') ?? [];
-    quotes.add(quote);
-    await prefs.setStringList('savedQuotes', quotes);
-  }
-
   Column _buildButtonColumn(
       Color color, IconData icon, String label, TapCallback tapCallback) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // IconButton(
-        //     onPressed: () {
-        //       shareContent(text);
-        //     },
-        //     icon: Icon(icon))
-        // Icon(icon, color: color),
-        // Container(
-        //   margin: const EdgeInsets.only(top: 8),
-        //   child: Text(
-        //     label,
-        //     style: TextStyle(
-        //       fontSize: 12,
-        //       fontWeight: FontWeight.w400,
-        //       color: color,
-        //     ),
-        //   ),
-        // ),
         InkWell(
           onTap: () {
             tapCallback();
@@ -153,39 +124,42 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               children: [
                 Center(
-                    child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 50.0, vertical: 50.0),
-                  child: Text(
-                    currentQuote,
-                    style: TextStyle(
-                      color: Colors.grey[500],
-                      fontSize: 24,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50.0, vertical: 50.0),
+                    child: Text(
+                      currentQuote,
+                      style: TextStyle(
+                        color: Colors.grey[500],
+                        fontSize: 24,
+                      ),
                     ),
                   ),
-                )),
+                ),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildButtonColumn(
-                          Colors.grey, Icons.share, 'share', tapShare),
-                      _buildButtonColumn(
-                          Colors.grey, Icons.favorite_border, 'like', tapLike)
-                    ]),
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildButtonColumn(
+                        Colors.grey, Icons.share, 'share', tapShare),
+                    _buildButtonColumn(
+                        Colors.grey, Icons.favorite_border, 'like', tapLike)
+                  ],
+                ),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.settings),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SavedQuotesScreen()),
-                          );
-                        },
-                      )
-                    ])
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.settings),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SavedQuotesScreen()),
+                        );
+                      },
+                    )
+                  ],
+                )
               ],
             )
           ],
@@ -199,9 +173,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('My App'),
+        title: const Text('My App'),
       ),
-      body: Center(
+      body: const Center(
         child: CircularProgressIndicator(),
       ),
     );
