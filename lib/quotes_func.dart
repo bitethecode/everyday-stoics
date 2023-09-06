@@ -41,10 +41,14 @@ class QuoteData {
 Future<void> addQuote(QuoteData quote) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   List<QuoteData> quotes = await getSavedQuotes();
-  quotes.add(QuoteData(
-      id: quote.id,
-      quote: quote.quote,
-      date: DateFormat('yyyy-MM-dd').format(DateTime.now())));
+
+  bool quoteExists = quotes.any((q) => q.id == quote.id);
+  if (!quoteExists) {
+    quotes.add(QuoteData(
+        id: quote.id,
+        quote: quote.quote,
+        date: DateFormat('yyyy-MM-dd').format(DateTime.now())));
+  }
   List<String> quoteJsonList =
       quotes.map((q) => jsonEncode(q.toJson())).toList();
   await prefs.setStringList('quotes', quoteJsonList);
