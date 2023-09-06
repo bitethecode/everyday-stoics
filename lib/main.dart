@@ -85,8 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void tapShare() {
-    String content = "Check out this amazing content!";
-    shareContent(content);
+    // String content = "Check out this amazing content!";
+    shareContent(currentQuote.quote);
   }
 
   void tapLike() async {
@@ -103,16 +103,23 @@ class _MyHomePageState extends State<MyHomePage> {
           onTap: () {
             tapCallback();
           },
-          child: Container(
-            margin: const EdgeInsets.only(top: 8),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
+          child: Column(
+            children: [
+              Icon(
+                icon,
                 color: color,
               ),
-            ),
+              const SizedBox(
+                  height: 8), // Add some spacing between the icon and label
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: color,
+                ),
+              ),
+            ],
           ),
         )
       ],
@@ -132,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const LitStarfieldContainer(),
             Column(
               children: [
-                Center(
+                Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50.0, vertical: 50.0),
@@ -148,36 +155,36 @@ class _MyHomePageState extends State<MyHomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    _buildButtonColumn(Colors.grey, Icons.settings, 'settings',
+                        () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SavedQuotesScreen()),
+                      );
+                    }),
                     _buildButtonColumn(
                         Colors.grey, Icons.share, 'share', tapShare),
                     _buildButtonColumn(
-                        Colors.grey, Icons.favorite_border, 'like', tapLike)
+                        Colors.grey, Icons.favorite_border, 'like', tapLike),
+                    _buildButtonColumn(Colors.grey, Icons.refresh, 'refresh',
+                        () {
+                      changeText();
+                    })
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.settings),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SavedQuotesScreen()),
-                        );
-                      },
-                    )
-                  ],
+                SizedBox(
+                  height: 16,
                 )
               ],
             )
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: changeText,
-          tooltip: 'New Quote',
-          child: const Icon(Icons.refresh),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: changeText,
+        //   tooltip: 'New Quote',
+        //   child: const Icon(Icons.refresh),
+        // ),
       );
     }
     return Scaffold(
