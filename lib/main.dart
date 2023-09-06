@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'dart:math';
 import 'package:share_plus/share_plus.dart';
-import 'saved_quotes.dart';
+import 'settings.dart';
 import 'quotes_func.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -157,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SavedQuotesScreen()),
+                            builder: (context) => const SettingsScreen()),
                       );
                     }),
                     _buildButtonColumn(
@@ -170,8 +170,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     })
                   ],
                 ),
-                SizedBox(
-                  height: 16,
+                const SizedBox(
+                  height: 32,
                 )
               ],
             )
