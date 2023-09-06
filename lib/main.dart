@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:share_plus/share_plus.dart';
 import 'saved_quotes.dart';
 import 'quotes_func.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,14 +42,17 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List _items = [];
   bool isItemsLoaded = false;
-  String currentQuote = '';
+  QuoteData currentQuote = QuoteData.getPlaceholder();
   int currentQuoteIndex = 0;
 
   Future<void> readItems() async {
     final String res = await rootBundle.loadString('assets/data.json');
     final data = await json.decode(res);
+    List<dynamic> quotesData = data["quotes"];
+    List<QuoteData> quotes =
+        quotesData.map((quote) => QuoteData.fromJson(quote)).toList();
     setState(() {
-      _items = data["quotes"];
+      _items = quotes;
       isItemsLoaded = true;
       currentQuote = _items[currentQuoteIndex];
     });
@@ -67,6 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
   void shareContent(String text) {
     Share.share(text);
   }
+
+  // void clearSharedPreferences() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.clear();
+  // }
 
   @override
   void initState() {
@@ -128,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50.0, vertical: 50.0),
                     child: Text(
-                      currentQuote,
+                      currentQuote.quote,
                       style: TextStyle(
                         color: Colors.grey[500],
                         fontSize: 24,

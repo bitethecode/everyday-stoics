@@ -1,14 +1,54 @@
 {
-    "quotes": [
-        "You have power over your mind - not outside events. Realize this, and you will find strength.",
-        "The best revenge is to be unlike him who performed the injury.",
-        "Waste no more time arguing about what a good man should be. Be one.",
-        "The happiness of your life depends upon the quality of your thoughts.",
-        "Very little is needed to make a happy life; it is all within yourself, in your way of thinking.",
-        "The soul becomes dyed with the color of its thoughts.",
-        "It is not death that a man should fear, but he should fear never beginning to live.",
-        "The universe is change; our life is what our thoughts make it.",
-        "The first rule is to keep an untroubled spirit. The second is to look things in the face and know them for what they are.",
-        "The impediment to action advances action. What stands in the way becomes the way."
-    ]
+  "quotes": [
+    {
+      "id": "a2e377d4-1f98-4c5d-bf84-2cda8e1f3e4a",
+      "quote": "The impediment to action advances action. What stands in the way becomes the way.",
+      "author": "Marcus Aurelius"
+    },
+    {
+      "id": "b3d2d6a2-5f0d-4c26-8fb5-9f3e0e537a9d",
+      "quote": "If it is not right, do not do it; if it is not true, do not say it.",
+      "author": "Epictetus"
+    },
+    {
+      "id": "c4e5f8b7-2d3f-4a1c-9e0b-6d786c9e0f5e",
+      "quote": "The happiness of your life depends upon the quality of your thoughts.",
+      "author": "Seneca"
+    },
+    {
+      "id": "d5f6e7b8-3c4d-4b2a-8f1e-7a9b8c0d4e3f",
+      "quote": "The greater the difficulty, the more glory in surmounting it.",
+      "author": "Seneca"
+    },
+    {
+      "id": "e6d7c8b9-4d5e-4f3a-9b8c-0d1e2f3a4b5c",
+      "quote": "No person has the power to have everything they want, but it is in their power not to want what they don't have, and to cheerfully put to good use what they do have.",
+      "author": "Seneca"
+    },
+    {
+      "id": "f7e8d9c0-5e6f-4d3c-8b9a-7c8d9e0f1e2d",
+      "quote": "It's not what happens to you, but how you react to it that matters.",
+      "author": "Epictetus"
+    },
+    {
+      "id": "g8f9e0d1-6f7e-4e3d-9c8b-0a1b2c3d4e5f",
+      "quote": "The best revenge is not to be like your enemy.",
+      "author": "Marcus Aurelius"
+    },
+    {
+      "id": "h9g0f1e2-7e8d-4f3e-9d0c-1b2c3d4e5f6g",
+      "quote": "He suffers more than necessary, who suffers before it is necessary.",
+      "author": "Seneca"
+    },
+    {
+      "id": "i0h1g2f3-8d9c-4e5f-9d8c-2b3a4b5c6d7e",
+      "quote": "It is not the man who has too little, but the man who craves more, that is poor.",
+      "author": "Seneca"
+    },
+    {
+      "id": "j1i2h3g4-9c0d-4b5a-8c9d-3e4f5g6h7i8",
+      "quote": "The wise man is content with his lot, whatever it may be, without wishing for what he has not.",
+      "author": "Seneca"
+    }
+  ]
 }
