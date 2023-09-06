@@ -130,10 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     if (isItemsLoaded) {
       return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-        ),
+        appBar: null,
         body: Stack(
           children: <Widget>[
             const LitStarfieldContainer(),
