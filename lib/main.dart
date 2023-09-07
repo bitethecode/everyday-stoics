@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'change_notifier.dart';
 import 'package:lit_starfield/lit_starfield.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -9,7 +11,10 @@ import 'quotes_func.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+        create: (context) => ThemeNotifier(), child: const MyApp()),
+  );
 }
 
 typedef TapCallback = void Function();
@@ -129,11 +134,26 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     if (isItemsLoaded) {
+      // final theme = Provider.of<ThemeNotifier>(context).selectedTheme;
       return Scaffold(
         appBar: null,
         body: Stack(
           children: <Widget>[
-            const LitStarfieldContainer(),
+            Builder(
+              builder: (BuildContext context) {
+                final theme = Provider.of<ThemeNotifier>(context).selectedTheme;
+                return LitStarfieldContainer(
+                    backgroundDecoration:
+                        BoxDecoration(color: theme.primaryColor));
+              },
+            ),
+
+            // const LitStarfieldContainer(
+            //   backgroundDecoration: BoxDecoration(
+            //     color: theme.primaryColor,
+            //   ),
+            //   // starColor: Colors.white,
+            // ),
             Column(
               children: [
                 Expanded(
