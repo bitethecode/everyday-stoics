@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/themes_preview.dart';
 import 'package:provider/provider.dart';
+import 'themes_preview.dart';
 import 'change_notifier.dart';
 
 List<ThemeData> availableThemes = [
@@ -50,12 +52,21 @@ class _ThemeSelectionScreenState extends State<ThemeSelectionScreen> {
         itemCount: availableThemes.length,
         itemBuilder: (context, index) {
           final theme = availableThemes[index];
-          return ListTile(
-            title: Text('Theme ${index + 1}'),
-            onTap: () {
-              changeTheme(theme);
-            },
-          );
+          return Align(
+              alignment: Alignment.center,
+              child: Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: ListTile(
+                    title: Text('Theme ${index + 1}'),
+                    onTap: () {
+                      changeTheme(theme);
+                    },
+                    trailing: SizedBox(
+                      width: 80,
+                      child: ColorSchemePreview(
+                          colors: [theme.primaryColor, theme.backgroundColor]),
+                    ),
+                  )));
         },
       ),
     );
