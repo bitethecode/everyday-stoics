@@ -30,23 +30,3 @@ class ColorSchemePreview extends StatelessWidget {
     );
   }
 }
-
-// class ColorSchemePreview extends StatelessWidget {
-//   final List<Color> colors;
-
-//   const ColorSchemePreview({Key? key, required this.colors}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       children: colors.map((color) {
-//         return Expanded(
-//           child: Container(
-//             height: 100,
-//             color: color,
-//           ),
-//         );
-//       }).toList(),
-//     );
-//   }
-// }

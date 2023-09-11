@@ -77,20 +77,13 @@ class _MyHomePageState extends State<MyHomePage> {
     Share.share(text);
   }
 
-  // void clearSharedPreferences() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   await prefs.clear();
-  // }
-
   @override
   void initState() {
     super.initState();
-    // clearSharedPreferences();
     readItems();
   }
 
   void tapShare() {
-    // String content = "Check out this amazing content!";
     shareContent(currentQuote.quote);
   }
 
@@ -134,7 +127,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     if (isItemsLoaded) {
-      // final theme = Provider.of<ThemeNotifier>(context).selectedTheme;
       return Scaffold(
         appBar: null,
         body: Stack(
@@ -215,11 +207,6 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ],
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: changeText,
-        //   tooltip: 'New Quote',
-        //   child: const Icon(Icons.refresh),
-        // ),
       );
     }
     return Scaffold(

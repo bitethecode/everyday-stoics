@@ -45,7 +45,6 @@ class _SavedQuotesScreenState extends State<SavedQuotesScreen> {
                 icon: const Icon(Icons.delete),
                 onPressed: () {
                   // Show a confirmation dialog if needed
-
                   removeQuoteFromSharedPreferences(quoteData.id);
                   setState(() {
                     savedQuotes.removeWhere((item) => item.id == quoteData.id);

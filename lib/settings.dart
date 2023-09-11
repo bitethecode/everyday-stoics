@@ -11,12 +11,9 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  // List<QuoteData> savedQuotes = [];
-
   @override
   void initState() {
     super.initState();
-    // setSavedQuotes();
   }
 
   void showThemes() {

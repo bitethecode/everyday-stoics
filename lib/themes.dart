@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/themes_preview.dart';
 import 'package:provider/provider.dart';
-import 'themes_preview.dart';
 import 'change_notifier.dart';
 
 List<ThemeData> availableThemes = [
   ThemeData(
     brightness: Brightness.light,
     primaryColor: Colors.black,
-    backgroundColor: Colors.white,
     // Add more properties as per your requirements
   ),
   ThemeData(
     brightness: Brightness.dark,
-    primaryColor: Colors.orange,
-    backgroundColor: Colors.black,
+    primaryColor: Color(0xFF283828),
     // Add more properties as per your requirements
   ),
   // Add more themes as neededselectTheme
@@ -48,7 +45,7 @@ class _ThemeSelectionScreenState extends State<ThemeSelectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Theme Selection'),
+        title: const Text('Theme Selection'),
       ),
       body: ListView.builder(
         itemCount: availableThemes.length,
