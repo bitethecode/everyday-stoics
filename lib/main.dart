@@ -147,25 +147,43 @@ class _MyHomePageState extends State<MyHomePage> {
                         BoxDecoration(color: theme.primaryColor));
               },
             ),
-
-            // const LitStarfieldContainer(
-            //   backgroundDecoration: BoxDecoration(
-            //     color: theme.primaryColor,
-            //   ),
-            //   // starColor: Colors.white,
-            // ),
             Column(
               children: [
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50.0, vertical: 50.0),
-                    child: Text(
-                      currentQuote.quote,
-                      style: TextStyle(
-                        color: Colors.grey[500],
-                        fontSize: 24,
-                      ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "${currentQuote.quote}",
+                                style: TextStyle(
+                                  color: Colors.grey[500],
+                                  fontSize: 24,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 6,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              "- ${currentQuote.author}",
+                              style: TextStyle(
+                                color: Colors.grey[500],
+                                fontSize: 24,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
