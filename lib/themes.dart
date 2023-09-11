@@ -40,6 +40,8 @@ class _ThemeSelectionScreenState extends State<ThemeSelectionScreen> {
   void changeTheme(ThemeData theme) {
     final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
     themeNotifier.selectedTheme = theme;
+
+    Navigator.popUntil(context, (route) => route.isFirst);
   }
 
   @override
